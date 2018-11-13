@@ -158,9 +158,9 @@ install-icons:
 	$(gtk_update_icon_cache)
 
 install-dbus:
-	install -d $(dbus_system_conf_dir)
-	install -m 644 data/$(dbus_system_conf_file) $(dbus_system_conf_dir)
-	@if test "$(DISABLE_MAKEFILE_DBUS_RELOAD)" = ""; then \
+#	install -d $(dbus_system_conf_dir)
+#	install -m 644 data/$(dbus_system_conf_file) $(dbus_system_conf_dir)
+#	@if test "$(DISABLE_MAKEFILE_DBUS_RELOAD)" = ""; then \
 	if [ -x $(servicetool) ]; then \
 	$(servicetool) dbus force-reload; \
 	else if [ -r /etc/init.d/dbus ]; then \
@@ -170,7 +170,7 @@ install-dbus:
 install-gconf:
 	install -d $(gconf_schema_file_dir)
 	install -m 644 data/$(gconf_schema_file) $(gconf_schema_file_dir)
-	@if test "$(GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL)" = ""; then \
+#	@if test "$(GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL)" = ""; then \
 	gconf-schemas --register $(gconf_schema_file_dir)/$(gconf_schema_file); \
 	fi
 
@@ -209,7 +209,7 @@ uninstall-dbus:
 
 #FIXME: treat gconf schema file as proper conffile?
 uninstall-gconf:
-	@if test "$(GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL)" = ""; then \
+#	@if test "$(GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL)" = ""; then \
 	if test -r "$(gconf_schema_file_dir)/$(gconf_schema_file)"; then \
 	gconf-schemas --unregister $(gconf_schema_file_dir)/$(gconf_schema_file); fi; \
 	fi
